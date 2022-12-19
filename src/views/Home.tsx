@@ -20,7 +20,7 @@ export const Home = () => {
         data,
         isLoading,
         error
-    } = useGetShowListByDateQuery(`web?date=${moment().format('YYYY-MM-DD')}&country=US`, {refetchOnMountOrArgChange: true})
+    } = useGetShowListByDateQuery(`web?date=${moment().subtract(7,'d').format('YYYY-MM-DD')}&country=US`, {refetchOnMountOrArgChange: true})
 
     useEffect(() => {
         if (!isUndefined(error)) {
