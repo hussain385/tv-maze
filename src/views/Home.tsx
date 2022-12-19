@@ -11,6 +11,7 @@ import {showTodayDateInfo} from "../redux/actions";
 import {EmptyUI} from "../components/EmptyUI";
 import {IShowInfo} from "../interfaces/showInterfaces";
 import {LoadingScreenComponent} from "../components/loading-screen.component";
+import moment from "moment";
 
 export const Home = () => {
     const dispatch = useAppDispatch()
@@ -19,7 +20,7 @@ export const Home = () => {
         data,
         isLoading,
         error
-    } = useGetShowListByDateQuery('web?date=2022-12-15&country=US', {refetchOnMountOrArgChange: true})
+    } = useGetShowListByDateQuery(`web?date=${moment().format('YYYY-MM-DD')}&country=US`, {refetchOnMountOrArgChange: true})
 
     useEffect(() => {
         if (!isUndefined(error)) {
@@ -63,7 +64,7 @@ export const Home = () => {
             <HomeHeaderComponent/>
             <Box sx={{marginTop: {xs: '1em', md:'-10em'}, paddingInline: '10vw', marginBottom: '3em'}}>
                 <h1 style={{fontWeight: '500'}}>Last Added Shows</h1>
-                <Box sx={{display: 'flex', flexWrap: 'wrap', gap: '1em', justifyContent: 'center', alignItems: 'flex-start'}}>
+                <Box sx={{display: 'flex', flexWrap: 'wrap', gap: '1em', justifyContent: {xs: 'center', md: 'flex-start'}, alignItems: 'flex-start'}}>
                     {showInfo.map((value: IShowInfo, key: number) => (
                         <ShowCardsComponent show={value} key={key}/>
                     ))}
